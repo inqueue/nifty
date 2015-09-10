@@ -1,0 +1,5 @@
+# Create an alias 'thecurl' for using later.
+alias thecurl="curl 'http://dockerip:9202/_cat/shards/twitter3?v&h=node,index,shard,store,docs,segments.memory,segments.count,segments.index_writer_max_memory,merges.current_docs,merges.total_time' -s"
+
+# Continuously loop 'thecurl' and sort the output by the first column. Column headers are preserved.
+while true; do date; thecurl | awk 'NR<2{print $0;next}{print $0| "sort"}'; sleep 1; echo; done
